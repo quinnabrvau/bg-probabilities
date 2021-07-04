@@ -1,16 +1,20 @@
 import React from 'react';
 import { InputNumber, Switch } from 'antd';
 import { CloseCircleFilled } from '@ant-design/icons';
+import minions from '../minions';
 import classes from './SelectedCards.module.css';
 
 const SelectedCards = (props) => {
-    const andOr = <Switch checkedChildren="and" unCheckedChildren="or" defaultChecked 
-    checked={props.isAnd} onChange={props.changeAndMode} />
-    const emptySpanForAlignment = props.isAnd ?
-        <span style={{display: 'inline-block', width: '52px'}}></span> : 
-        <span style={{display: 'inline-block', width: '44px'}}></span>;
+    const andOr = <Switch checkedChildren="and" unCheckedChildren="or" defaultChecked
+        checked={props.isAnd} onChange={props.changeAndMode} className={classes.Switch}/>
+    const emptySpanForAlignment = <span className={classes.Switch}/>;
 
     const entries = Object.keys(props.selectedCards).map(key => {
+        const card = minions.find(card => card['Name'] === key);
+         var image = null;
+        if ('ID' in card)
+            image = card && (<img src={`https://art.hearthstonejson.com/v1/orig/${card.ID}.png`} alt={key}/>);
+
         let isLastKey = (key === Object.keys(props.selectedCards)[Object.keys(props.selectedCards).length - 1]);
         let maxCardsInCurrentTier = props.tierCardCounts[props.minionsMap[key].Tier];
         let currentAmount = props.selectedCards[key];
@@ -37,6 +41,7 @@ const SelectedCards = (props) => {
         return (
             <div key={key} className={classes.Entry}>
                 <CloseCircleFilled className={classes.Close} alt="Remove" onClick={() => props.delete(key)}/>
+                { image }
                 <span> at least &nbsp; </span>
                 {cardAmountInput}
                 &nbsp;

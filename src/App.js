@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NoDropdownSelector from './NoDropdownSelector/NoDropdownSelector';
 import DropdownSelector from './DropdownSelector/DropdownSelector';
+import Radio from './Radio/radio';
 import Header from './Header/Header';
 import Results from './Results/Results'
 import minions from './minions';
@@ -9,8 +10,8 @@ import './App.css';
 import SelectedCards from './SelectedCards/SelectedCards';
 import ReactGA from 'react-ga';
 
-const tribes = ['Beast', 'Demon', 'Dragon', 'Mech', 'Murloc', 'Pirate'];
-const tiers = [1, 2, 3, 4, 5, 6]
+const tribes = ['Good', 'Evil', 'Animal', ['Prince','Princess'], 'Mage', 'Dwarf', 'Monster', 'Treant', 'Egg', 'Dragon', 'Fairy'];
+const tiers = [2, 3, 4, 5, 6]
 
 class App extends Component {
 
@@ -18,7 +19,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      missingTribe: tribes[0],
+      missingTribes: [],
       currentTier: tiers[0],
       rollCount: 1,
       buyableCards: [],
@@ -42,19 +43,23 @@ class App extends Component {
 
   componentDidMount() {
     this.minionToAttributesMap = this.mapNameToObjectOfAttributes();
-    this.changeBuyableCards(this.state.currentTier, this.state.missingTribe);
+    this.changeBuyableCards(this.state.currentTier, this.state.missingTribes);
   }
 
-  changeMissingTribeHandler = (e) => {
-    let tribeType = e.target.value;
-    this.setState({missingTribe: tribeType});
-    this.changeBuyableCards(this.state.currentTier, tribeType);
+  changeMissingTribeHandler = (position, e) => {
+    this.setState(prevState => {
+      let missingTribes =  [...prevState.missingTribes];
+      missingTribes[position] = e.target.value;
+      this.changeBuyableCards(this.state.currentTier, missingTribes);
+
+      return { missingTribes };
+    });
   }
 
   changeCurrentTierHandler = (e) => {
     let tier = e.target.value;
     this.setState({currentTier: tier});
-    this.changeBuyableCards(tier, this.state.missingTribe);
+    this.changeBuyableCards(tier, this.state.missingTribes);
   }
 
   calculateLongestSelectedCardCharCount(selectedCards) {
@@ -143,10 +148,10 @@ class App extends Component {
     this.setState({'isAnd': checked});
   }
 
-  changeBuyableCards(
-    tier, 
-    tribeType) {
 
+  changeBuyableCards(
+    tier,
+    missingTribes) {
     let tierAppropriateMinions = minions.filter(item => {
       if (parseInt(item.Tier) > tier) {
         this.deleteSelectedCardHandler(item.Name);
@@ -156,23 +161,18 @@ class App extends Component {
     });
 
     let tribeAppropriateMinions = tierAppropriateMinions.filter(item => {
-      let synergies = item.Synergy.split(',');
-      if (synergies[0] === "") {
-        if (item.Type === tribeType) {
-          this.deleteSelectedCardHandler(item.Name);
-          return false;
-        } else {
-          return true;
-        }
-      } else if (synergies.length > 1) {
-        return true;
+      let synergies = item.Combined.split(',').map(str => str.trim());
+
+      // If a card has multiple type synergies with it, only remove it if all those type synergies are included inside of missingTribes
+      let typeSynergies = synergies.filter(synergy => tribes.includes(synergy))
+
+      const isoverlap = typeSynergies.every(type => missingTribes.includes(type));
+
+      if (typeSynergies.length > 0 && isoverlap) {
+        this.deleteSelectedCardHandler(item.Name)
+        return false;
       } else {
-        if (synergies[0] === tribeType) {
-          this.deleteSelectedCardHandler(item.Name);
-          return false;
-        } else {
-          return true;
-        }
+        return true;
       }
     });
 
@@ -184,15 +184,36 @@ class App extends Component {
     ReactGA.pageview('/home-page');
   }
 
-  render() { 
+  missingTribes() {
+    let radioList = [];
+
+    // for (let i in Array.from(Array(tribes.length - 5))) {
+    //   let handler = this.changeMissingTribeHandler.bind(this, i);
+    //   let prefixText = `Banned tribe # ${parseInt(i)+1}`;
+    //   radioList.push(
+    //       <Radio
+    //         key={i.toString()}
+    //         collection={tribes}
+    //         prefixText={prefixText}
+    //         index={i}
+    //         allSelected={this.state.missingTribes}
+    //         currentSelected={this.state.missingTribes[i]}
+    //         changed={handler} />
+    //   );
+    // }
+
+    return (
+      <div>
+        {radioList}
+      </div>
+    )
+  }
+
+  render() {
     return (
       <div className="App">
         <Header />
-        <NoDropdownSelector 
-          collection={tribes} 
-          currentSelected={this.state.missingTribe}
-          changed={this.changeMissingTribeHandler}
-          prefixText="The missing tribe is:" />
+        {this.missingTribes()}
 
         <NoDropdownSelector
           collection={tiers}
@@ -200,10 +221,10 @@ class App extends Component {
           changed={this.changeCurrentTierHandler}
           prefixText="The current tavern tier is:" />
 
-        <DropdownSelector 
+        <DropdownSelector
           collection={this.state.buyableCards}
           currentTier={this.state.currentTier}
-          missingTribe={this.state.missingTribe}
+          missingTribes={this.state.missingTribes}
           selectedCards={this.state.selectedCards}
           changed={this.addSelectedCardHandler} />
 
