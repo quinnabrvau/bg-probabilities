@@ -10,8 +10,8 @@ import './App.css';
 import SelectedCards from './SelectedCards/SelectedCards';
 import ReactGA from 'react-ga';
 
-const tribes = ['Beast', 'Demon', 'Dragon', 'Mech', 'Murloc', 'Pirate', 'Elemental', 'Quilboar'];
-const tiers = [1, 2, 3, 4, 5, 6]
+const tribes = ['Good', 'Evil', 'Animal', ['Prince','Princess'], 'Mage', 'Dwarf', 'Monster', 'Treant', 'Egg', 'Dragon', 'Fairy'];
+const tiers = [2, 3, 4, 5, 6]
 
 class App extends Component {
 
@@ -19,7 +19,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      missingTribes: [tribes[0], tribes[1], tribes[2]],
+      missingTribes: [],
       currentTier: tiers[0],
       rollCount: 1,
       buyableCards: [],
@@ -187,20 +187,20 @@ class App extends Component {
   missingTribes() {
     let radioList = [];
 
-    for (let i in Array.from(Array(tribes.length - 5))) {
-      let handler = this.changeMissingTribeHandler.bind(this, i);
-      let prefixText = `Banned tribe # ${parseInt(i)+1}`;
-      radioList.push(
-          <Radio 
-            key={i.toString()}
-            collection={tribes}
-            prefixText={prefixText}
-            index={i}
-            allSelected={this.state.missingTribes}
-            currentSelected={this.state.missingTribes[i]}
-            changed={handler} />
-      );
-    }
+    // for (let i in Array.from(Array(tribes.length - 5))) {
+    //   let handler = this.changeMissingTribeHandler.bind(this, i);
+    //   let prefixText = `Banned tribe # ${parseInt(i)+1}`;
+    //   radioList.push(
+    //       <Radio
+    //         key={i.toString()}
+    //         collection={tribes}
+    //         prefixText={prefixText}
+    //         index={i}
+    //         allSelected={this.state.missingTribes}
+    //         currentSelected={this.state.missingTribes[i]}
+    //         changed={handler} />
+    //   );
+    // }
 
     return (
       <div>

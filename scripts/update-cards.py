@@ -46,4 +46,7 @@ if __name__ == '__main__':
     # for index, row in minions.iterrows():
     #     print(f"|{row['Combined']}|")
 
-    minions.to_json('minions-sbb.json', orient='records', indent=2)
+    with open('../src/minions.js','w') as file:
+        file.write('const minions = ')
+        minions.to_json(file, orient='records', indent=2)
+        file.write('\nexport default minions;')

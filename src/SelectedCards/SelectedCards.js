@@ -11,7 +11,9 @@ const SelectedCards = (props) => {
 
     const entries = Object.keys(props.selectedCards).map(key => {
         const card = minions.find(card => card['Name'] === key);
-        const image = card && (<img src={`https://art.hearthstonejson.com/v1/orig/${card.ID}.png`} alt={key}/>);
+         var image = null;
+        if ('ID' in card)
+            image = card && (<img src={`https://art.hearthstonejson.com/v1/orig/${card.ID}.png`} alt={key}/>);
 
         let isLastKey = (key === Object.keys(props.selectedCards)[Object.keys(props.selectedCards).length - 1]);
         let maxCardsInCurrentTier = props.tierCardCounts[props.minionsMap[key].Tier];

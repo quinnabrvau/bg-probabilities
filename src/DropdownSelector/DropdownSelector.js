@@ -9,7 +9,9 @@ class Selector extends Component {
     render() {
         let names = this.props.collection.map(item => {
             const card = minions.find(card => card['Name'] === item.Name);
-            const image = card && (<img className={classes.Clip} src={`https://art.hearthstonejson.com/v1/orig/${card.ID}.png`} alt={item.Name}/>);
+            var image = null;
+            if ('ID' in card)
+                image = card && (<img className={classes.Clip} src={`https://art.hearthstonejson.com/v1/orig/${card.ID}.png`} alt={item.Name}/>);
 
             return <Option key={item.Name} disabled={Object.keys(this.props.selectedCards).indexOf(item.Name) >= 0} value={item.Name}>
                 {image}
