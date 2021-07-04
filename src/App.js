@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import NoDropdownSelector from './NoDropdownSelector/NoDropdownSelector';
 import DropdownSelector from './DropdownSelector/DropdownSelector';
-import Radio from './Radio/radio';
+// import Radio from './Radio/radio';
 import Header from './Header/Header';
 import Results from './Results/Results'
 import minions from './minions';

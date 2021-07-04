@@ -47,6 +47,7 @@ if __name__ == '__main__':
     #     print(f"|{row['Combined']}|")
 
     with open('../src/minions.js','w') as file:
+        file.write('/* eslint-disable no-useless-escape */\n')
         file.write('const minions = ')
         minions.to_json(file, orient='records', indent=2)
         file.write('\nexport default minions;')
