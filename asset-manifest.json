@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/sbb-probabilities/static/css/main.819343d8.chunk.css",
-    "main.js": "/sbb-probabilities/static/js/main.39859fed.chunk.js",
-    "main.js.map": "/sbb-probabilities/static/js/main.39859fed.chunk.js.map",
+    "main.js": "/sbb-probabilities/static/js/main.35f49480.chunk.js",
+    "main.js.map": "/sbb-probabilities/static/js/main.35f49480.chunk.js.map",
     "runtime-main.js": "/sbb-probabilities/static/js/runtime-main.213d5d89.js",
     "runtime-main.js.map": "/sbb-probabilities/static/js/runtime-main.213d5d89.js.map",
     "static/css/2.0b5d44dd.chunk.css": "/sbb-probabilities/static/css/2.0b5d44dd.chunk.css",
     "static/js/2.9f335be9.chunk.js": "/sbb-probabilities/static/js/2.9f335be9.chunk.js",
     "static/js/2.9f335be9.chunk.js.map": "/sbb-probabilities/static/js/2.9f335be9.chunk.js.map",
     "index.html": "/sbb-probabilities/index.html",
-    "precache-manifest.e810017c1c76d7741877d8c641858e41.js": "/sbb-probabilities/precache-manifest.e810017c1c76d7741877d8c641858e41.js",
+    "precache-manifest.cf57ca1814a291a38a4ad5ddb608b2a3.js": "/sbb-probabilities/precache-manifest.cf57ca1814a291a38a4ad5ddb608b2a3.js",
     "service-worker.js": "/sbb-probabilities/service-worker.js",
     "static/css/2.0b5d44dd.chunk.css.map": "/sbb-probabilities/static/css/2.0b5d44dd.chunk.css.map",
     "static/css/main.819343d8.chunk.css.map": "/sbb-probabilities/static/css/main.819343d8.chunk.css.map",
@@ -20,6 +20,6 @@
     "static/css/2.0b5d44dd.chunk.css",
     "static/js/2.9f335be9.chunk.js",
     "static/css/main.819343d8.chunk.css",
-    "static/js/main.39859fed.chunk.js"
+    "static/js/main.35f49480.chunk.js"
   ]
 }

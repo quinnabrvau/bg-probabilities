@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "3d0b285ba5a27bb7fb37b0494e8e6512",
+    "revision": "de2436491a4dda71579d394c2587570b",
     "url": "/sbb-probabilities/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/sbb-probabilities/static/css/2.0b5d44dd.chunk.css"
   },
   {
-    "revision": "076117e2ac996d923e32",
+    "revision": "f601e87a8871ae48e834",
     "url": "/sbb-probabilities/static/css/main.819343d8.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/sbb-probabilities/static/js/2.9f335be9.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "076117e2ac996d923e32",
-    "url": "/sbb-probabilities/static/js/main.39859fed.chunk.js"
+    "revision": "f601e87a8871ae48e834",
+    "url": "/sbb-probabilities/static/js/main.35f49480.chunk.js"
   },
   {
     "revision": "703534df2c01320c5932",
