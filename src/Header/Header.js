@@ -11,7 +11,7 @@ const Header = (props) => {
             </div>
             <div>
                 <div className={classes.Title}>
-                    <h2>QuinnAbr's Hearthstone Battlegrounds Probability Calculator</h2>
+                    <h2>QuinnAbr's Storybook Brawl Probability Calculator</h2>
                 </div>
             </div>
         </div>
