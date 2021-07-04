@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/sbb-probabilities/precache-manifest.cf57ca1814a291a38a4ad5ddb608b2a3.js"
+  "/sbb-probabilities/precache-manifest.ee49ed0268fe7ccf8f2e87657ad90922.js"
 );
 
 self.addEventListener('message', (event) => {
